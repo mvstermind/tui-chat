@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"time"
 
 	"github.com/fstanis/screenresolution"
+	"github.com/go-vgo/robotgo"
 	"golang.org/x/term"
 )
 
@@ -19,8 +21,10 @@ var (
 	TWidth  int
 
 	// terminal cell size in px
-	CHeight float64
-	CWidth  float64
+	CHeight int
+	CWidth  int
+
+	ScreenCells []int
 )
 
 func init() {
@@ -50,8 +54,8 @@ func init() {
 	*sw = res.Width
 	*sh = res.Height
 
-	*cw = math.Round(float64(*sw / *tw))
-	*ch = math.Round(float64(*sh / *th))
+	*cw = int(math.Round(float64(*sw / *tw)))
+	*ch = int(math.Round(float64(*sh / *th)))
 
 }
 
@@ -59,5 +63,11 @@ func main() {
 	fmt.Println(TWidth, THeight)
 	fmt.Printf("Screen res is %v x %v\n", SWidth, SHeight)
 	fmt.Printf("Single cell size in px is %v, %v", CWidth, CHeight)
+
+	for i := 0; i < 20; i++ {
+		mousex, mousey := robotgo.Location()
+		fmt.Println(mousex, mousey)
+		time.Sleep(1 * time.Second)
+	}
 
 }

@@ -1,0 +1,10 @@
+top left
+x = 0, y = 0
+bot left
+x = 0, y = max
+
+
+top right
+x = max, y = 0
+bot right
+x = max, y = max
