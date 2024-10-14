@@ -23,6 +23,11 @@ var (
 	CWidth  int
 )
 
+type ObjectPosition struct {
+	XPos, YPos int
+	Hovered    bool
+}
+
 func init() {
 	var (
 		tw  = &TWidth
@@ -50,9 +55,7 @@ func init() {
 }
 
 func main() {
-	fmt.Println(TWidth, THeight)
-	fmt.Printf("Screen res is %v x %v\n", SWidth, SHeight)
-	fmt.Printf("Single cell size in px is %v, %v\n", CWidth, CHeight)
+	clearScreen()
 
 	// width cells map
 	cellsSliceX := make([]int, TWidth+1)
@@ -73,7 +76,7 @@ func main() {
 		mouseX, mouseY := robotgo.Location()
 		cellX := findCell(mouseX, cellsSliceX)
 		cellY := findCell(mouseY, cellsSliceY)
-		fmt.Printf("\rCell: X: %d, Y: %d    ", cellX, cellY)
+		fmt.Printf("\r x: %d y: %d", cellX, cellY)
 	}
 }
 
@@ -86,3 +89,6 @@ func findCell(pos int, cellsSlice []int) int {
 	return len(cellsSlice) - 2 // return the last valid cell if not found
 }
 
+func clearScreen() {
+	fmt.Printf("\033c")
+}
